@@ -1,0 +1,37 @@
+{
+  "name": "@nivite/sdk",
+  "version": "1.0.0",
+  "description": "Create your own invite - the nerdy way",
+  "main": "index.js",
+  "private": false,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nivite/sdk.git"
+  },
+  "keywords": [
+    "invite",
+    "rsvp",
+    "wedding",
+    "birthday",
+    "graduation",
+    "festival",
+    "diy",
+    "party",
+    "gettogether",
+    "potluck",
+    "celebration",
+    "picnic"
+  ],
+  "author": "Anand R",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nivite/sdk/issues"
+  },
+  "homepage": "https://github.com/nivite/sdk#readme",
+  "publishConfig": {
+    "access": "public"
+  }
+}
