@@ -7,7 +7,9 @@ export function asMoment(valueOf: number | moment.Moment | undefined): moment.Mo
   return moment(valueOf);
 }
 export function asMomentUtc(valueOf: number | moment.Moment | undefined, format: string): string {
-  return moment(valueOf).utc().format(format);
+  return moment(valueOf)
+    .utc()
+    .format(format);
 }
 export function asMomentUtcGuessEnd(valueOf: number | moment.Moment | undefined): moment.Moment {
   return moment(valueOf).add(5, 'hours');
@@ -27,8 +29,8 @@ export interface IInviteDB extends IBaseDB {
   type?: string;
   title: string;
   hostName?: string;
-  timeFrom?: moment.Moment | number;    // Server expects UTC epoch time in milliseconds
-  timeTo?: moment.Moment | number;    // Server expects UTC epoch time in milliseconds
+  timeFrom?: moment.Moment | number; // Server expects UTC epoch time in milliseconds
+  timeTo?: moment.Moment | number; // Server expects UTC epoch time in milliseconds
   tz?: string;
   longMsg?: string;
   shortMsg?: string;
@@ -40,7 +42,7 @@ export interface IInviteDB extends IBaseDB {
   showGuests?: boolean;
   autoApproveNewRsvp?: boolean;
   visibleByLink?: boolean;
-  photos?: IInvitePhotoDB[]
+  photos?: IInvitePhotoDB[];
   customerInvites?: ICustomerInviteDB[];
   customerInvite?: ICustomerInviteDB;
   template?: ITemplateDB;
