@@ -8,23 +8,45 @@ import {
   asMomentUtcGuessEnd,
   dateTimeUTCForGooglenYahoo,
   dateTimeUTCForOutlook,
-  IInviteDB
+  IInviteDB,
 } from './nivite-sdk';
-
 
 export class NiviteSdk {
   public static apple(invite: IInviteDB): string {
-    const event = APPLE_START + 'BEGIN:VEVENT' + APPLE_SEPARATOR +
-      'UID:oid' + '@nivite.com' + APPLE_SEPARATOR +
-      'CLASS:PUBLIC' + APPLE_SEPARATOR +
-      'DESCRIPTION:' + invite.longMsg + '\n\n~' + invite.hostName + '\nnivite.com' + APPLE_SEPARATOR +
-      (invite.timeFrom ? 'DTSTAMP;VALUE=DATE-TIME:' + asMomentUtc(invite.timeFrom, dateTimeUTCForOutlook) + APPLE_SEPARATOR : '') +
-      (invite.timeFrom ? 'DTSTART;VALUE=DATE-TIME:' + asMomentUtc(invite.timeFrom, dateTimeUTCForOutlook) + APPLE_SEPARATOR : '') +
-      (invite.timeFrom ? 'DTEND;VALUE=DATE-TIME:' + asMomentUtc(invite.timeTo ? invite.timeTo : asMomentUtcGuessEnd(invite.timeFrom), dateTimeUTCForOutlook) + APPLE_SEPARATOR : '') +
+    const event =
+      APPLE_START +
+      'BEGIN:VEVENT' +
+      APPLE_SEPARATOR +
+      'UID:oid' +
+      '@nivite.com' +
+      APPLE_SEPARATOR +
+      'CLASS:PUBLIC' +
+      APPLE_SEPARATOR +
+      'DESCRIPTION:' +
+      invite.longMsg +
+      '\n\n~' +
+      invite.hostName +
+      '\nnivite.com' +
+      APPLE_SEPARATOR +
+      (invite.timeFrom
+        ? 'DTSTAMP;VALUE=DATE-TIME:' + asMomentUtc(invite.timeFrom, dateTimeUTCForOutlook) + APPLE_SEPARATOR
+        : '') +
+      (invite.timeFrom
+        ? 'DTSTART;VALUE=DATE-TIME:' + asMomentUtc(invite.timeFrom, dateTimeUTCForOutlook) + APPLE_SEPARATOR
+        : '') +
+      (invite.timeFrom
+        ? 'DTEND;VALUE=DATE-TIME:' +
+          asMomentUtc(invite.timeTo ? invite.timeTo : asMomentUtcGuessEnd(invite.timeFrom), dateTimeUTCForOutlook) +
+          APPLE_SEPARATOR
+        : '') +
       (invite.addrText ? 'LOCATION:' + invite.addrText + APPLE_SEPARATOR : '') +
-      'SUMMARY;LANGUAGE=en-us:' + invite.title + APPLE_SEPARATOR +
-      'TRANSP:TRANSPARENT' + APPLE_SEPARATOR +
-      'END:VEVENT' + APPLE_END;
+      'SUMMARY;LANGUAGE=en-us:' +
+      invite.title +
+      APPLE_SEPARATOR +
+      'TRANSP:TRANSPARENT' +
+      APPLE_SEPARATOR +
+      'END:VEVENT' +
+      APPLE_END;
     saveAs(event, 'nivite.ics');
     return event;
   }
