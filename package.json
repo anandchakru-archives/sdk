@@ -1,6 +1,6 @@
 {
   "name": "@nivite/sdk",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Create your own invite - the nerdy way",
   "main": "index.js",
   "private": false,
