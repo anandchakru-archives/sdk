@@ -8,3 +8,5 @@ References used [thank you!]:
 https://itnext.io/step-by-step-building-and-publishing-an-npm-typescript-package-44fe7164964c
 https://zellwk.com/blog/publish-to-npm/
 https://github.com/AnandChowdhary/calendar-link
+https://github.com/nwcell/ics.js
+https://icalendar.org/validator.html

@@ -1,13 +1,33 @@
+import { saveAs } from 'file-saver';
 import { stringify } from 'query-string';
 import {
+  APPLE_END,
+  APPLE_SEPARATOR,
+  APPLE_START,
   asMomentUtc,
   asMomentUtcGuessEnd,
   dateTimeUTCForGooglenYahoo,
   dateTimeUTCForOutlook,
-  IInviteDB,
+  IInviteDB
 } from './nivite-sdk';
 
+
 export class NiviteSdk {
+  public static apple(invite: IInviteDB): string {
+    const event = APPLE_START + 'BEGIN:VEVENT' + APPLE_SEPARATOR +
+      'UID:oid' + '@nivite.com' + APPLE_SEPARATOR +
+      'CLASS:PUBLIC' + APPLE_SEPARATOR +
+      'DESCRIPTION:' + invite.longMsg + '\n\n~' + invite.hostName + '\nnivite.com' + APPLE_SEPARATOR +
+      (invite.timeFrom ? 'DTSTAMP;VALUE=DATE-TIME:' + asMomentUtc(invite.timeFrom, dateTimeUTCForOutlook) + APPLE_SEPARATOR : '') +
+      (invite.timeFrom ? 'DTSTART;VALUE=DATE-TIME:' + asMomentUtc(invite.timeFrom, dateTimeUTCForOutlook) + APPLE_SEPARATOR : '') +
+      (invite.timeFrom ? 'DTEND;VALUE=DATE-TIME:' + asMomentUtc(invite.timeTo ? invite.timeTo : asMomentUtcGuessEnd(invite.timeFrom), dateTimeUTCForOutlook) + APPLE_SEPARATOR : '') +
+      (invite.addrText ? 'LOCATION:' + invite.addrText + APPLE_SEPARATOR : '') +
+      'SUMMARY;LANGUAGE=en-us:' + invite.title + APPLE_SEPARATOR +
+      'TRANSP:TRANSPARENT' + APPLE_SEPARATOR +
+      'END:VEVENT' + APPLE_END;
+    saveAs(event, 'nivite.ics');
+    return event;
+  }
   public static google(invite: IInviteDB): string {
     const details = {
       action: 'TEMPLATE',
@@ -47,19 +67,6 @@ export class NiviteSdk {
     return `https://calendar.yahoo.com/?${stringify(details)}`;
   }
   public static ical(invite: IInviteDB) {
-    /*const cal = ical({
-          domain: 'nivite.com',
-          prodId: { company: 'nivite.com', product: 'nivite' },
-          name: 'Nerdy Invites',
-          timezone: tz()
-        });
-        const event = cal.createEvent({
-          start: asMoment(),
-          end: asMoment().add(1, 'hour'),
-          timezone: tz(),
-          summary: 'My Event',
-          organizer: 'Sebastian Pekarek <mail@example.com>'
-        });
-        console.log(cal.toString());*/
+    return this.apple(invite);
   }
 }
