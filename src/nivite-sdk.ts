@@ -2,7 +2,7 @@ import * as moment from 'moment';
 
 export const dateTimeUTCForGooglenYahoo = 'YYYYMMDD[T]HHmmss[Z]';
 export const dateTimeUTCForOutlook = 'YYYYMMDD[T]HHmmss';
-export const APPLE_SEPARATOR = navigator.appVersion.indexOf('Win') !== -1 ? '\r\n' : '\n';
+export const APPLE_SEPARATOR = '\r\n';
 export const APPLE_START =
   'BEGIN:VCALENDAR' + APPLE_SEPARATOR + 'PRODID:nivite.com' + APPLE_SEPARATOR + 'VERSION:2.0' + APPLE_SEPARATOR;
 export const APPLE_END = APPLE_SEPARATOR + 'END:VCALENDAR';
