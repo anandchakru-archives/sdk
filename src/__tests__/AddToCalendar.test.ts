@@ -1,4 +1,6 @@
 import { NiviteSdk } from '../index';
+declare var global: any;
+
 const e1 = { title: '' };
 const e2 = { title: '', timeFrom: 1563498000000, longMsg: 'simple msg', hostName: 'Foo Bar' };
 const e3 = { title: '', timeFrom: 1563498000000, timeTo: 1563508800000, longMsg: 'simple msg', hostName: 'Foo Bar' };
@@ -50,6 +52,7 @@ test('Yahoo', () => {
 });
 
 test('Apple', () => {
+  global.URL.createObjectURL = jest.fn();
   expect(NiviteSdk.apple(e1)).toBe(
     'BEGIN:VCALENDAR\nPRODID:nivite.com\nVERSION:2.0\nBEGIN:VEVENT\nUID:oid@nivite.com\nCLASS:PUBLIC\nDESCRIPTION:undefined\n\n~undefined\nnivite.com\nSUMMARY;LANGUAGE=en-us:\nTRANSP:TRANSPARENT\nEND:VEVENT\nEND:VCALENDAR',
   );

@@ -36,8 +36,8 @@ export class NiviteSdk {
         : '') +
       (invite.timeFrom
         ? 'DTEND;VALUE=DATE-TIME:' +
-          asMomentUtc(invite.timeTo ? invite.timeTo : asMomentUtcGuessEnd(invite.timeFrom), dateTimeUTCForOutlook) +
-          APPLE_SEPARATOR
+        asMomentUtc(invite.timeTo ? invite.timeTo : asMomentUtcGuessEnd(invite.timeFrom), dateTimeUTCForOutlook) +
+        APPLE_SEPARATOR
         : '') +
       (invite.addrText ? 'LOCATION:' + invite.addrText + APPLE_SEPARATOR : '') +
       'SUMMARY;LANGUAGE=en-us:' +
@@ -47,8 +47,8 @@ export class NiviteSdk {
       APPLE_SEPARATOR +
       'END:VEVENT' +
       APPLE_END;
-    saveAs(event, 'nivite.ics');
-    return event;
+    saveAs(new Blob([event]), 'nivite.ics');
+    return event; // for jest to unit-test
   }
   public static google(invite: IInviteDB): string {
     const details = {
