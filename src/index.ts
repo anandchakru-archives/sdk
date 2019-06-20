@@ -23,7 +23,8 @@ export class NiviteSdk {
       'CLASS:PUBLIC' +
       APPLE_SEPARATOR +
       'DESCRIPTION:' +
-      (invite.longMsg ? (invite.longMsg as string).substr(0, 25) + '...' : '') + ' ~ nivite.com' +
+      (invite.longMsg ? (invite.longMsg as string).substr(0, 25) + '...' : '') +
+      ' ~ nivite.com' +
       APPLE_SEPARATOR +
       (invite.timeFrom
         ? 'DTSTAMP;VALUE=DATE-TIME:' + asMomentUtc(invite.timeFrom, dateTimeUTCForGooglenYahoo) + APPLE_SEPARATOR
@@ -33,8 +34,11 @@ export class NiviteSdk {
         : '') +
       (invite.timeFrom
         ? 'DTEND;VALUE=DATE-TIME:' +
-        asMomentUtc(invite.timeTo ? invite.timeTo : asMomentUtcGuessEnd(invite.timeFrom), dateTimeUTCForGooglenYahoo) +
-        APPLE_SEPARATOR
+          asMomentUtc(
+            invite.timeTo ? invite.timeTo : asMomentUtcGuessEnd(invite.timeFrom),
+            dateTimeUTCForGooglenYahoo,
+          ) +
+          APPLE_SEPARATOR
         : '') +
       (invite.addrText ? 'LOCATION:' + invite.addrText.split(',').join('\\,') + APPLE_SEPARATOR : '') +
       'SUMMARY;LANGUAGE=en-us:' +
