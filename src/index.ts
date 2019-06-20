@@ -23,23 +23,20 @@ export class NiviteSdk {
       'CLASS:PUBLIC' +
       APPLE_SEPARATOR +
       'DESCRIPTION:' +
-      invite.longMsg +
-      '\n\n~' +
-      invite.hostName +
-      '\nnivite.com' +
+      (invite.longMsg as string).substr(0, 25) + '...' + ' ~ nivite.com' +
       APPLE_SEPARATOR +
       (invite.timeFrom
-        ? 'DTSTAMP;VALUE=DATE-TIME:' + asMomentUtc(invite.timeFrom, dateTimeUTCForOutlook) + APPLE_SEPARATOR
+        ? 'DTSTAMP;VALUE=DATE-TIME:' + asMomentUtc(invite.timeFrom, dateTimeUTCForGooglenYahoo) + APPLE_SEPARATOR
         : '') +
       (invite.timeFrom
-        ? 'DTSTART;VALUE=DATE-TIME:' + asMomentUtc(invite.timeFrom, dateTimeUTCForOutlook) + APPLE_SEPARATOR
+        ? 'DTSTART;VALUE=DATE-TIME:' + asMomentUtc(invite.timeFrom, dateTimeUTCForGooglenYahoo) + APPLE_SEPARATOR
         : '') +
       (invite.timeFrom
         ? 'DTEND;VALUE=DATE-TIME:' +
-          asMomentUtc(invite.timeTo ? invite.timeTo : asMomentUtcGuessEnd(invite.timeFrom), dateTimeUTCForOutlook) +
-          APPLE_SEPARATOR
+        asMomentUtc(invite.timeTo ? invite.timeTo : asMomentUtcGuessEnd(invite.timeFrom), dateTimeUTCForGooglenYahoo) +
+        APPLE_SEPARATOR
         : '') +
-      (invite.addrText ? 'LOCATION:' + invite.addrText + APPLE_SEPARATOR : '') +
+      (invite.addrText ? 'LOCATION:' + invite.addrText.split(',').join('\\,') + APPLE_SEPARATOR : '') +
       'SUMMARY;LANGUAGE=en-us:' +
       invite.title +
       APPLE_SEPARATOR +
