@@ -36,8 +36,8 @@ export class NiviteSdk {
         : '') +
       (invite.timeFrom
         ? 'DTEND;VALUE=DATE-TIME:' +
-        asMomentUtc(invite.timeTo ? invite.timeTo : asMomentUtcGuessEnd(invite.timeFrom), dateTimeUTCForOutlook) +
-        APPLE_SEPARATOR
+          asMomentUtc(invite.timeTo ? invite.timeTo : asMomentUtcGuessEnd(invite.timeFrom), dateTimeUTCForOutlook) +
+          APPLE_SEPARATOR
         : '') +
       (invite.addrText ? 'LOCATION:' + invite.addrText + APPLE_SEPARATOR : '') +
       'SUMMARY;LANGUAGE=en-us:' +
