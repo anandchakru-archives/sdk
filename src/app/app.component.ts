@@ -3,10 +3,6 @@ import { NgElement, WithProperties, createCustomElement } from '@angular/element
 import { NiviteWrapComponent } from './components/nivite-wrap/nivite-wrap.component';
 import { HttpClient } from '@angular/common/http';
 
-
-declare function require(url: string);
-const invite = require('../assets/sample.json');
-
 @Component({
   selector: 'nivite-sdk-root',
   templateUrl: './app.component.html',

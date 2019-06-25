@@ -16,6 +16,7 @@ const concat = require('concat');
   ];
   await fs.ensureDir('./dist/sdk');
   await fs.ensureDir('./dist/elements');
+  await fs.ensureDir('./dist/elements/test');
 
   await concat(files_es5, 'dist/sdk/nivite-sdk-es5.js');
   await concat(files_es2015, 'dist/sdk/nivite-sdk-es2015.js');
@@ -23,13 +24,13 @@ const concat = require('concat');
   // For testing in local
   fs.copy('dist/sdk/nivite-sdk-es5.js', 'src/assets/nivite-sdk-es5.js', { overwrite: true });
   fs.copy('dist/sdk/nivite-sdk-es2015.js', 'src/assets/nivite-sdk-es2015.js', { overwrite: true });
-  fs.copy('dist/sdk/styles.css', 'src/assets/styles.css');
+  fs.copy('dist/sdk/styles.css', 'src/assets/styles.css', { overwrite: true });
 
   // For publishing to npm
   fs.copy('dist/sdk/nivite-sdk-es5.js', 'dist/elements/nivite-sdk-es5.js', { overwrite: true });
   fs.copy('dist/sdk/nivite-sdk-es2015.js', 'dist/elements/nivite-sdk-es2015.js', { overwrite: true });
-  fs.copy('dist/sdk/styles.css', 'dist/elements/styles.css');
-
-  console.info('Elements created.');
+  fs.copy('dist/sdk/styles.css', 'dist/elements/styles.css', { overwrite: true });
+  fs.copy('src/styles.scss', 'dist/elements/scss/styles.scss', { overwrite: true });
+  fs.copy('sample.json', 'dist/elements/test/sample.json', { overwrite: true });
 
 })()

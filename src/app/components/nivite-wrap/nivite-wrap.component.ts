@@ -25,11 +25,11 @@ export class NiviteWrapComponent implements OnInit, OnDestroy {
   showEmailInRsvpModalPreviousCustomerInvt: ICustomerInviteDB;
   fg: FormGroup;
 
-  invite: IInviteDB;
+  @Input() invite: IInviteDB;
   @Input() inviteOid: string;
   @Input() customerInviteOid: string;
 
-  @Output() loaded = new EventEmitter<boolean>();
+  @Output() loaded = new EventEmitter<IInviteDB>();
   @Output() err = new EventEmitter<string>();
   @Output() rsvp = new EventEmitter<{ status: string, payload: IInviteDB }>();
 
@@ -41,23 +41,26 @@ export class NiviteWrapComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.loaded.next(false);
-    const url = new URL(window.location.href).searchParams;
-    if (!this.inviteOid) {
-      this.inviteOid = url.get('iOid');
-      this.customerInviteOid = url.get('ciOid');
-    }
-    if (this.inviteOid) {
-      this.api.fetchInvite(this.inviteOid, this.customerInviteOid).subscribe((invite: IInviteDB) => {
-        this.invite = invite;
-        this.setLoaded();
-      }, (error => {
-        this.setLoaded();
-        this.err.next(error);
-      }));
+    if (this.invite) {
+      this.initialize();
     } else {
-      this.setLoaded();
-      this.err.next('Missing invite id in: ' + window.location.href);
+      const url = new URL(window.location.href).searchParams;
+      if (!this.inviteOid) {
+        this.inviteOid = url.get('iOid');
+        this.customerInviteOid = url.get('ciOid');
+      }
+      if (this.inviteOid) {
+        this.api.fetchInvite(this.inviteOid, this.customerInviteOid).subscribe((invite: IInviteDB) => {
+          this.invite = invite;
+          this.initialize();
+        }, (error => {
+          this.initialize();
+          this.err.emit(error);
+        }));
+      } else {
+        this.initialize();
+        this.err.emit('Missing invite id in: ' + window.location.href);
+      }
     }
   }
 
@@ -136,10 +139,9 @@ export class NiviteWrapComponent implements OnInit, OnDestroy {
   isYOrNOrM(rsvp: 'Y' | 'N' | 'M'): boolean {
     return this.invite && this.invite.customerInvite && this.invite.customerInvite.rsvp && (this.invite.customerInvite.rsvp === rsvp);
   }
-  private setLoaded() {
+  private initialize() {
     setTimeout(() => {
       this.loading = false;
-      this.loaded.next(true);
       this.initRsvpForm();
       if (!this.invite) {
         interval(1000).pipe(takeWhile(i => !this.invite), takeUntil(this.uns)).subscribe((i: number) => {
@@ -156,6 +158,8 @@ export class NiviteWrapComponent implements OnInit, OnDestroy {
           }
           this.counter--;
         });
+      } else {
+        this.loaded.emit(this.invite);
       }
     }, 100);
   }
@@ -220,7 +224,7 @@ export class NiviteWrapComponent implements OnInit, OnDestroy {
   }
   saveRsvp(rsvp: 'Y' | 'N' | 'M') {
     this.savingrsvp = true;
-    this.rsvp.next({ status: 'savingrsvp', payload: this.invite });
+    this.rsvp.emit({ status: 'savingrsvp', payload: this.invite });
     const customerInvite = (this.invite.customerInvite ? this.invite.customerInvite : { customer: {} });
     if (this.invite && this.invite.customerInvite && this.invite.customerInvite.customer) {
       customerInvite.customerId = this.invite.customerInvite.customer.customerId;
@@ -246,7 +250,7 @@ export class NiviteWrapComponent implements OnInit, OnDestroy {
       this.showEmailInRsvpModalPreviousCustomerInvt = undefined;
       this.resetRsvpForm();
       this.savingrsvp = false;
-      this.rsvp.next({ status: 'savedrsvp', payload: this.invite });
+      this.rsvp.emit({ status: 'savedrsvp', payload: this.invite });
     }, (error) => {
       this.savingrsvp = false;
     });

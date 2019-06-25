@@ -3,13 +3,20 @@ import { NgModule, Injector, DoBootstrap } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { NiviteWrapComponent } from './components/nivite-wrap/nivite-wrap.component';
-import { createCustomElement } from '@angular/elements';
+import { createCustomElement, WithProperties, NgElement } from '@angular/elements';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+import { IInviteDB } from './pojos/invite';
 
 const routes: Routes = [
   { path: '**', component: AppComponent }
 ];
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'nivite-wrap': NgElement & WithProperties<{ invite: IInviteDB, inviteOid: string, customerInviteOid: string }>;
+  }
+}
 
 @NgModule({
   declarations: [
@@ -30,6 +37,8 @@ const routes: Routes = [
 export class AppModule implements DoBootstrap {
   constructor(private injector: Injector) { }
   ngDoBootstrap() {
-    customElements.define('nivite-wrap', createCustomElement(NiviteWrapComponent, { injector: this.injector }));
+    if (!customElements.get('nivite-wrap')) {
+      customElements.define('nivite-wrap', createCustomElement(NiviteWrapComponent, { injector: this.injector }));
+    }
   }
 }

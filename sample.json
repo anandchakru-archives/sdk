@@ -1,0 +1,101 @@
+{
+  "type": "Birthday",
+  "hostName": "Anand & Saranya",
+  "photos": [
+    {
+      "oid": "18071b59676a0",
+      "url": "https://drive.google.com/uc?export=view&id=1V3xEnNKwzH16EAg2-XJNjh3v3xsb2MIm",
+      "tags": "",
+      "title": "DSC_0377.jpg",
+      "description": ""
+    },
+    {
+      "oid": "1807165b6bf4d",
+      "url": "https://drive.google.com/uc?export=view&id=1mBCpcL6J97RYbknQ--lE2D6fgTG5nEfm",
+      "tags": "",
+      "title": "DSC_0117.jpg",
+      "description": ""
+    }
+  ],
+  "inviteId": 1,
+  "tz": "America/Los_Angeles",
+  "showGuests": true,
+  "timeFrom": 1564279200000,
+  "timeTo": 1564290000000,
+  "addrName": "9420 Broadmoor Dr",
+  "addrText": "9420 Broadmoor Dr, San Ramon, CA 94583, USA",
+  "addrUrl": "https://maps.google.com/?q=9420+Broadmoor+Dr,+San+Ramon,+CA+94583,+USA&ftid=0x808fedb347e6c539:0xdf99dde6961b2164",
+  "invitePreviewKey": "1807113850564",
+  "title": "This is a sample invite",
+  "longMsg": "We are so excited to invite and have you. See you all soon",
+  "oid": "1807175406407",
+  "shortMsg": "You're invited",
+  "addrType": null,
+  "customerInvite": {
+    "role": "GUEST",
+    "customer": {
+      "name": "A Forum",
+      "uid": null,
+      "tz": null,
+      "customerId": 3,
+      "email": "anandchakru.forum@gmail.com",
+      "_links": {
+        "self": {
+          "href": "http://localhost:8080/repo/customer/3{?projection}",
+          "templated": true
+        },
+        "roles": {
+          "href": "http://localhost:8080/repo/customer/3/roles"
+        },
+        "customerInvites": {
+          "href": "http://localhost:8080/repo/customer/3/customerInvites{?projection}",
+          "templated": true
+        }
+      }
+    },
+    "adultCount": 11,
+    "customerInviteId": 3,
+    "emailed": false,
+    "flaged": false,
+    "hostApproved": true,
+    "kidCount": 11,
+    "longMsg": "aa",
+    "notifyUpdates": false,
+    "oid": "180712f008a48",
+    "opened": false,
+    "replied": false,
+    "rsvp": "Y",
+    "shortMsg": null,
+    "viewCount": null,
+    "_links": {
+      "self": {
+        "href": "http://localhost:8080/repo/customer-invite/3{?projection}",
+        "templated": true
+      },
+      "customer": {
+        "href": "http://localhost:8080/repo/customer-invite/3/customer{?projection}",
+        "templated": true
+      },
+      "invite": {
+        "href": "http://localhost:8080/repo/customer-invite/3/invite{?projection}",
+        "templated": true
+      }
+    }
+  },
+  "_links": {
+    "self": {
+      "href": "http://localhost:8080/repo/invite/1"
+    },
+    "inviteDB": {
+      "href": "http://localhost:8080/repo/invite/1{?projection}",
+      "templated": true
+    },
+    "template": {
+      "href": "http://localhost:8080/repo/invite/1/template"
+    },
+    "customerInvites": {
+      "href": "http://localhost:8080/repo/invite/1/customerInvites{?projection}",
+      "templated": true
+    }
+  }
+}

@@ -14,8 +14,8 @@
       <ng-container *ngIf="!invite;else showrsvp">
         <a class="nav-link btn btn-sm my-2 mr-0 border-0">
           <i class="far fa-frown-open"></i> Error <i class="fas fa-heart-broken"></i>
-          <small class="ml-2">Going <a class="text-white" [href]="redirectUrl">home</a> in
-            <strong>{{counter}}</strong></small>
+          <span class="ml-2 text-muted">Going <a class="text-white" [href]="redirectUrl">home</a> in
+            <strong>{{counter}}</strong></span>
         </a>
       </ng-container>
       <ng-template #showrsvp>
