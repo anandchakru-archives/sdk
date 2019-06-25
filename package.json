@@ -2,23 +2,19 @@
   "name": "@nivite/sdk",
   "version": "1.0.7",
   "description": "Create your own invite - the nerdy way",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
-  "private": false,
   "scripts": {
-    "build": "tsc",
-    "test": "jest --config jestconfig.json",
-    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
-    "lint": "tslint -p tsconfig.json",
-    "prepare": "npm run build",
-    "prepublishOnly": "npm test && npm run lint",
-    "preversion": "npm run lint",
-    "version": "npm run format && git add -A src",
-    "postversion": "git push && git push --tags"
+    "ng": "ng",
+    "start": "ng serve --port 4300",
+    "build": "node build-elements-pre.js && ng build --prod --output-hashing none && node build-elements.js && node build-elements-post.js ",
+    "test": "echo 'TBD'",
+    "lint": "ng lint",
+    "e2e": "ng e2e"
   },
+  "main": "dist/elements/nivite-sdk-es2015.js",
   "files": [
-    "lib/**/*"
+    "dist/elements/**/*"
   ],
+  "private": false,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nivite/sdk.git"
@@ -46,19 +42,50 @@
   "publishConfig": {
     "access": "public"
   },
-  "devDependencies": {
-    "@types/jest": "^24.0.15",
-    "jest": "^24.8.0",
-    "prettier": "^1.18.2",
-    "ts-jest": "^24.0.2",
-    "tslint": "^5.17.0",
-    "tslint-config-prettier": "^1.18.0",
-    "typescript": "^3.5.2"
-  },
   "dependencies": {
+    "@angular/animations": "~8.0.0",
+    "@angular/common": "~8.0.0",
+    "@angular/compiler": "~8.0.0",
+    "@angular/core": "~8.0.0",
+    "@angular/elements": "^8.0.2",
+    "@angular/forms": "~8.0.0",
+    "@angular/platform-browser": "~8.0.0",
+    "@angular/platform-browser-dynamic": "~8.0.0",
+    "@angular/router": "~8.0.0",
     "@types/file-saver": "^2.0.1",
+    "@webcomponents/webcomponentsjs": "^2.2.10",
+    "bootstrap": "^4.3.1",
+    "document-register-element": "^1.7.2",
     "file-saver": "^2.0.2",
+    "jquery": "^3.4.1",
     "moment": "^2.24.0",
-    "query-string": "^6.7.0"
+    "popper": "^1.0.1",
+    "rxjs": "~6.4.0",
+    "tslib": "^1.9.0",
+    "zone.js": "~0.9.1"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "~0.800.0",
+    "@angular/cli": "~8.0.1",
+    "@angular/compiler-cli": "~8.0.0",
+    "@angular/language-service": "~8.0.0",
+    "@types/jasmine": "~3.3.8",
+    "@types/jasminewd2": "~2.0.3",
+    "@types/node": "~8.9.4",
+    "codelyzer": "^5.0.0",
+    "concat": "^1.0.3",
+    "fs-extra": "^8.0.1",
+    "jasmine-core": "~3.4.0",
+    "jasmine-spec-reporter": "~4.2.1",
+    "karma": "~4.1.0",
+    "karma-chrome-launcher": "~2.2.0",
+    "karma-coverage-istanbul-reporter": "~2.0.1",
+    "karma-jasmine": "~2.0.1",
+    "karma-jasmine-html-reporter": "^1.4.0",
+    "protractor": "~5.4.0",
+    "replace-in-file": "^4.1.0",
+    "ts-node": "~7.0.0",
+    "tslint": "~5.15.0",
+    "typescript": "~3.4.3"
   }
 }

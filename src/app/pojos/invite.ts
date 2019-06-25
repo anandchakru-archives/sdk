@@ -46,6 +46,8 @@ export interface IInviteDB extends IBaseDB {
   showGuests?: boolean;
   autoApproveNewRsvp?: boolean;
   visibleByLink?: boolean;
+  adultCountRequired?: boolean;
+  kidCountRequired?: boolean;
   photos?: IInvitePhotoDB[];
   customerInvites?: ICustomerInviteDB[];
   customerInvite?: ICustomerInviteDB;
@@ -88,7 +90,7 @@ export interface ITemplateDB extends IBaseDB {
 }
 export interface ICustomerInviteDB extends IBaseDB {
   customerInviteId?: number;
-  role?: 'HOST' | 'COLLAB' | 'GUEST' | 'VIEW';
+  role?: 'HOST' | 'COLLAB' | 'GUEST' | 'UNAPPROVED';
   rsvp?: 'Q' | 'P' | 'V' | 'B' | 'Y' | 'N' | 'M' | 'O' | 'Z';
   opened?: boolean;
   replied?: boolean;
@@ -106,6 +108,9 @@ export interface ICustomerInviteDB extends IBaseDB {
   customerName?: string;
   customerId?: number;
   customerOid?: string;
+  inviteId?: number;
+  inviteOid?: string;
+  referredByOid?: string; // If the Guests changes to new email and responds, capture the previously selected oid if any
 }
 export interface ICustomerRoleDB extends IBaseDB {
   role?: string;
