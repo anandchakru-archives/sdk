@@ -44,9 +44,3 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
-
-src/assets/nivite-sdk-es2015\.js
-
-src/assets/nivite-sdk-es5\.js
-
-src/assets/styles\.css
