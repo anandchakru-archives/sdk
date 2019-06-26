@@ -1,5 +1,6 @@
 import * as moment from 'moment';
 
+export const NIVITE_NAV = 'nivite-nav';
 export const dateTimeUTCForGooglenYahoo = 'YYYYMMDD[T]HHmmss[Z]';
 export const dateTimeUTCForOutlook = 'YYYYMMDD[T]HHmmss';
 export const APPLE_SEPARATOR = '\r\n';

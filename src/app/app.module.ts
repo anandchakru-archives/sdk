@@ -6,7 +6,7 @@ import { NiviteWrapComponent } from './components/nivite-wrap/nivite-wrap.compon
 import { createCustomElement, WithProperties, NgElement } from '@angular/elements';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-import { IInviteDB } from './pojos/invite';
+import { IInviteDB, NIVITE_NAV } from './pojos/invite';
 
 const routes: Routes = [
   { path: '**', component: AppComponent }
@@ -19,10 +19,7 @@ declare global {
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NiviteWrapComponent
-  ],
+  declarations: [AppComponent, NiviteWrapComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -37,8 +34,8 @@ declare global {
 export class AppModule implements DoBootstrap {
   constructor(private injector: Injector) { }
   ngDoBootstrap() {
-    if (!customElements.get('nivite-wrap')) {
-      customElements.define('nivite-wrap', createCustomElement(NiviteWrapComponent, { injector: this.injector }));
+    if (!customElements.get(NIVITE_NAV)) {
+      customElements.define(NIVITE_NAV, createCustomElement(NiviteWrapComponent, { injector: this.injector }));
     }
   }
 }

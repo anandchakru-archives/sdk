@@ -5,7 +5,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --port 4300",
-    "build": "node build-elements-pre.js && ng build --prod --output-hashing none && node build-elements.js && node build-elements-post.js && node gh-pages.js",
+    "build": "node build-elements-pre.js && ng build --prod --output-hashing none && node build-elements.js && node build-elements-post.js",
+    "gh": "node gh-pages.js",
     "test": "echo 'TBD'",
     "lint": "ng lint",
     "e2e": "ng e2e"

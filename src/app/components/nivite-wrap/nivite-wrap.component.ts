@@ -24,8 +24,8 @@ export class NiviteWrapComponent implements OnInit, OnDestroy {
   showEmailInRsvpModalForm = false;
   showEmailInRsvpModalPreviousCustomerInvt: ICustomerInviteDB;
   fg: FormGroup;
-
-  @Input() invite: IInviteDB;
+  invite: IInviteDB;
+  @Input() inviteStr: string;
   @Input() inviteOid: string;
   @Input() customerInviteOid: string;
 
@@ -41,7 +41,8 @@ export class NiviteWrapComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    if (this.invite) {
+    if (this.inviteStr && this.inviteStr.length) {
+      this.invite = JSON.parse(this.inviteStr);
       this.initialize();
     } else {
       const url = new URL(window.location.href).searchParams;
