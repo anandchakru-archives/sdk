@@ -1,9 +1,12 @@
+npm run build
 CB=$(git rev-parse --abbrev-ref HEAD)
 echo -e "Current: ${CB}"
 cp -r ./dist ../
 echo -e "Tmp copy"
 git checkout gh-pages
 echo -e "Checkout gh-pages"
+rm -rf ./dist
+echo -e "Cleanup /dist"
 cp -rf ../dist/ .
 echo -e "Copy tmp"
 git add .
