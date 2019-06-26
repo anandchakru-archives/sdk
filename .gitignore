@@ -56,7 +56,6 @@ NOTES.md
 tsconfig.app.json
 build-elements-post.js
 tsconfig.spec.json
-sample.json
 karma.conf.js
 build-elements-pre.js
 build-elements.js
