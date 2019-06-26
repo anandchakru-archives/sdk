@@ -162,7 +162,7 @@ export class NiviteWrapComponent implements OnInit, OnDestroy {
       } else {
         this.loaded.emit(this.invite);
       }
-    }, 100);
+    }, 1500);
   }
   private initRsvpForm() {
     if (this.invite) {
