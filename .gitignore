@@ -1,7 +1,7 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
-/dist
+/src
 /tmp
 /out-tsc
 # Only exists if Bazel was run
@@ -45,8 +45,22 @@ testem.log
 .DS_Store
 Thumbs.db
 
-src/assets/nivite-sdk-es2015\.js
-
-src/assets/nivite-sdk-es5\.js
-
-src/assets/styles\.css
+# Other files not required for gh-pages
+gh-pages.js
+tsconfig.json
+package-lock.json
+README.md
+NOTES.md
+.gitignore
+.prettierrc
+tsconfig.app.json
+build-elements-post.js
+tsconfig.spec.json
+sample.json
+karma.conf.js
+build-elements-pre.js
+build-elements.js
+package.json
+tslint.json
+angular.json
+browserslist
