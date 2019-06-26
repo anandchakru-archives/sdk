@@ -10,7 +10,11 @@ const fs = require('fs-extra');
   await fs.copySync('./dist/sdk', './dist/elements', {
     overwrite: true, filter: (src, dst) => {
       const matches = src.match(/(.dist\/sdk)|(dist\/sdk\/.*(css|js))/);  // https://regex101.com/r/k1jI5l/1
-      return matches && matches.length;
+      if ((matches && matches.length > 0)) {
+        console.log(src);
+        return true;
+      }
+      return false;
     }
   });
   await fs.copy('./src/styles.scss', './dist/elements/styles.scss', { overwrite: true });
