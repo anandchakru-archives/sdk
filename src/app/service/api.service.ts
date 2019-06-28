@@ -1,6 +1,5 @@
 import { IBaseDB, IInviteDB, ICustomerInviteDB } from "../pojo/invite";
 import { ReplaySubject, of, from, Observable } from 'rxjs';
-import { resolve } from "q";
 
 export class ApiService {
   public invite: IInviteDB = { title: 'Default Title' };
@@ -8,9 +7,14 @@ export class ApiService {
   private url = new URL(window.location.href).searchParams;
   private iOid = this.url.get('iOid');
   private ciOid = this.url.get('ciOid');
-  constructor(private host: string = '//localhost:8080') {
+  private lport = this.url.get('lport');
+  constructor(private host: string = '//api.nivite.com') {
     if (!this.supports()) {
       alert('EmbEr: Unable to make Ajax calls to the server.'); // EmbEr = Embarassing Error
+    }
+    if (this.lport) {
+      // if &lport=8080, use http://localhost:8080 instead of api.nivite.com
+      this.host = 'http://localhost:' + this.lport;
     }
     if (this.iOid) {
       const url = this.host + '/repo/invite/search/byOid?oid=' + this.iOid + (this.ciOid ? ('&ciOid=' + this.ciOid) : ('')) + '&projection=preview';
@@ -19,12 +23,17 @@ export class ApiService {
         this.loaded.next(this.invite);
       }).catch((e) => {
         console.log('Unable to fetch Invite: ' + JSON.stringify(e));
-        this.get('//nivite.github.io/sdk/sample.json').then((rsp: IBaseDB) => {
-          this.invite = rsp as IInviteDB;
-          this.loaded.next(this.invite);
-        });
+        this.loadsample();
       });
+    } else {
+      this.loadsample();
     }
+  }
+  private loadsample() {
+    this.get('//nivite.github.io/sdk/sample.json').then((rsp: IBaseDB) => {
+      this.invite = rsp as IInviteDB;
+      this.loaded.next(this.invite);
+    });
   }
   public upsertRsvp(customerInvite: ICustomerInviteDB): Observable<IBaseDB> {
     if (customerInvite.customerId) {
