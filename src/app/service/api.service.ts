@@ -18,7 +18,11 @@ export class ApiService {
         this.invite = rsp as IInviteDB;
         this.loaded.next(this.invite);
       }).catch((e) => {
-        console.log('Unable to fetch Invite: ' + e);
+        console.log('Unable to fetch Invite: ' + JSON.stringify(e));
+        this.get('//nivite.github.io/sdk/sample.json').then((rsp: IBaseDB) => {
+          this.invite = rsp as IInviteDB;
+          this.loaded.next(this.invite);
+        });
       });
     }
   }
