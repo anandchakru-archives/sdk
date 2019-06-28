@@ -60,10 +60,6 @@ export class NiviteRsvpModal {
                   ${this.notYourEmail()}
               </div>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" niviteclick="resetRsvpForm">Reset</button>
-              <button type="button" class="btn btn-secondary" niviteclick="resetRsvpForm" data-dismiss="modal">Close</button>
-            </div>
           </div>
         </div>
       </div>
@@ -75,13 +71,8 @@ export class NiviteRsvpModal {
         <input type="email" class="form-control" id="niviteRsvpModalFormEmail"
           aria-describedby="Your email address" placeholder="Enter email" #emailFormControl>
       </div>
-      <small class="form-text text-muted">
-        <ng-container *ngIf="(invite.customerInvite && invite.customerInvite.customer);else newemail">
-          Change it if its not your email address.
-        </ng-container>
-        <ng-template #newemail>
-          Email address for communications
-        </ng-template>
+      <small class="d-none d-sm-block form-text text-muted">
+        Email address for communications
       </small>
     `
     this.formEmailDiv.classList.add('form-group');
@@ -95,7 +86,7 @@ export class NiviteRsvpModal {
           <label for="niviteRsvpModalFormAdultCount">Adults</label>
           <input type="number" class="form-control" id="niviteRsvpModalFormAdultCount"
             aria-describedby="Number of adults">
-          <small class="form-text text-muted">Number of adults</small>
+          <small class="d-none d-sm-block form-text text-muted">Number of adults</small>
         </div>
       </div>
       <div class="col-sm">
@@ -103,7 +94,7 @@ export class NiviteRsvpModal {
           <label for="niviteRsvpModalFormKidCount">Kids</label>
           <input type="number" class="form-control" id="niviteRsvpModalFormKidCount"
             aria-describedby="Number of kids">
-          <small class="form-text text-muted">Number of kids (~12 years old)</small>
+          <small class="d-none d-sm-block form-text text-muted">Number of kids (~12 years old)</small>
         </div>
       </div>
     `
@@ -115,7 +106,7 @@ export class NiviteRsvpModal {
       <label for="niviteRsvpModalFormLongMsg">Message</label>
       <textarea type="number" class="form-control" id="niviteRsvpModalFormLongMsg"
       aria-describedby="Optional message to the host" rows="3"></textarea>
-      <small class="form-text text-muted">Optional message to the host</small>
+      <small class="d-none d-sm-block form-text text-muted">Optional message to the host</small>
     `
     this.formLongMsgDiv.classList.add('form-group');
     this.form.append(this.formLongMsgDiv);
