@@ -1,6 +1,13 @@
-// https://codepen.io/trey/post/nesting-sass-includes
-div#nivite {
+@import 'anim.scss';
 
+/* set body margin */
+body {
+  @include animation('applymargin 1s 1');
+  margin-top: 90px;
+}
+
+
+div#nivite {
   @import '~bootstrap/scss/bootstrap.scss';
   @import url('https://fonts.googleapis.com/css?family=Roboto|Patua+One&display=swap');
 
@@ -86,35 +93,27 @@ div#nivite {
   *[niviteclick] * {
     pointer-events: none;
   }
-}
 
-/* set body margin */
-body {
-  animation: applymargin 1s forwards;
-  animation-timing-function: ease-in;
-}
-
-.nivite.navbar {
-  animation: pulldown 1s forwards;
-  animation-timing-function: ease-in;
-}
-
-@keyframes pulldown {
-  0% {
-    margin-top: -90px;
+  .swing {
+    @include animation('swing 1s 1');
   }
 
-  100% {
-    margin-top: 0;
-  }
-}
-
-@keyframes applymargin {
-  0% {
-    margin-top: 0;
+  .nivite.navbar {
+    @include animation('pulldown 1s 1');
   }
 
-  100% {
-    margin-top: 90px;
+  .modal::before {
+    content: '';
+    bottom: 0;
+    left: 0;
+    top: 0;
+    position: absolute;
+    right: 0;
+    -webkit-filter: blur(20px);
+    filter: blur(20px);
+    backdrop-filter: blur(20px);
+    background-color: #454545;
+    opacity: 0.7;
+    margin: -50px;
   }
 }
