@@ -208,6 +208,7 @@ export class NiviteRsvpModal {
   private showFormEmailDiv() {
     if (this.formEmailDiv && this.form) {
       this.form.prepend(this.formEmailDiv);
+      $('#niviteRsvpModal').modal('handleUpdate')
       const nye = this.dom.querySelector('#niviteRsvpModalNotYourEmail');
       if (nye) {
         nye.classList.add('d-none');
@@ -220,6 +221,7 @@ export class NiviteRsvpModal {
       if (frm) {
         if (this.api.invite.customerInvite) {
           frm.removeChild(this.formEmailDiv);
+          $('#niviteRsvpModal').modal('handleUpdate')
           const nye = this.dom.querySelector('#niviteRsvpModalNotYourEmail');
           if (nye) {
             nye.classList.remove('d-none');
