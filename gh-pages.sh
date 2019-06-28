@@ -1,4 +1,4 @@
-npm run build
+npm run build:prod
 CB=$(git rev-parse --abbrev-ref HEAD)
 echo -e "Current: ${CB}"
 cp -r ./dist ../
