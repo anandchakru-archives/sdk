@@ -10,7 +10,7 @@
     "typecheck": "tsc"
   },
   "files": [
-    "dist/**/*"
+    "/dist"
   ],
   "private": false,
   "repository": {
