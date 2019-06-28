@@ -21,9 +21,6 @@ export class NiviteRsvpModal {
       if (event && event.target) {
         const attr = ((event.target as HTMLElement).attributes as NiviteNamedNodeMap).niviteclick;
         switch (attr && attr.value) {
-          case 'resetRsvpForm':
-            this.resetRsvpForm();
-            break;
           case 'saveRsvpY':
             this.saveRsvp('Y');
             break;
@@ -81,7 +78,7 @@ export class NiviteRsvpModal {
 
     this.formHeadCountDiv = document.createElement('div');
     this.formHeadCountDiv.innerHTML = `
-      <div class="col-sm">
+      <div class="col">
         <div class="form-group">
           <label for="niviteRsvpModalFormAdultCount">Adults</label>
           <input type="number" class="form-control" id="niviteRsvpModalFormAdultCount"
@@ -89,7 +86,7 @@ export class NiviteRsvpModal {
           <small class="d-none d-sm-block form-text text-muted">Number of adults</small>
         </div>
       </div>
-      <div class="col-sm">
+      <div class="col">
         <div class="form-group">
           <label for="niviteRsvpModalFormKidCount">Kids</label>
           <input type="number" class="form-control" id="niviteRsvpModalFormKidCount"
@@ -132,6 +129,9 @@ export class NiviteRsvpModal {
     //
     this.hideFormEmailDiv();
 
+    $('#niviteRsvpModal').on('hidden.bs.modal', (e) => {
+      this.resetRsvpForm();
+    })
   }
 
   getRsvp() {
@@ -198,7 +198,7 @@ export class NiviteRsvpModal {
   }
   private showFormEmailDiv() {
     if (this.formEmailDiv && this.form) {
-      this.form.prepend(this.formEmailDiv);
+      this.formEmailDiv.classList.remove('d-none');
       $('#niviteRsvpModal').modal('handleUpdate')
       const nye = this.dom.querySelector('#niviteRsvpModalNotYourEmail');
       if (nye) {
@@ -211,7 +211,7 @@ export class NiviteRsvpModal {
       const frm = this.formEmailDiv && this.formEmailDiv.parentElement;
       if (frm) {
         if (this.api.invite.customerInvite) {
-          frm.removeChild(this.formEmailDiv);
+          this.formEmailDiv.classList.add('d-none');
           $('#niviteRsvpModal').modal('handleUpdate')
           const nye = this.dom.querySelector('#niviteRsvpModalNotYourEmail');
           if (nye) {
