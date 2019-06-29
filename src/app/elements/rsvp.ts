@@ -331,7 +331,7 @@ export class NiviteRsvpModal {
         this.nivite.dispatchEvent(customEvent);
 
         const customEvent2 = document.createEvent('CustomEvent');
-        customEvent2.initCustomEvent(CE_ALERT, true, false, { msg: `Your response (${this.getRsvp()}) is Saved, you may add it to your calendar.`, type: 'success' })
+        customEvent2.initCustomEvent(CE_ALERT, true, false, { msg: `Your response (${this.getRsvp()}) is Saved, don\'t forget, add it to your calendar.`, type: 'success' })
         this.nivite.dispatchEvent(customEvent2);
       }
       $('#niviteRsvpModal').modal('hide');  //this.resetRsvpForm();
