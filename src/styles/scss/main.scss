@@ -3,7 +3,8 @@
 /* set body margin */
 body {
   @include animation('applymargin 1s 1');
-  margin-top: 75px !important; //nav is 71px
+  /* nav is 71px */
+  margin-top: 75px !important;
 }
 
 
