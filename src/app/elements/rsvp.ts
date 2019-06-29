@@ -72,7 +72,9 @@ export class NiviteRsvpModal {
         Email address for communications
       </small>
     `
-    this.formEmailDiv.classList.add('form-group', 'swing');
+    if (this.api.invite.customerInvite) { // swing animation only if invite.customerInvite is available
+      this.formEmailDiv.classList.add('form-group', 'swing');
+    }
     this.form = this.dom.querySelector('form#nivite-rsvp-modal-form') as HTMLFormElement;
     this.form.append(this.formEmailDiv);
 
