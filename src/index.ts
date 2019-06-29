@@ -13,9 +13,8 @@ window.onload = () => {
 
   const api = (ServiceFactory.instance().create('api', new ApiService()) as ApiService);
   ServiceFactory.instance().create('calendar', new CalendarService());
-
+  new NiviteAlert();
   api.loaded.subscribe((invite) => {
-    new NiviteAlert();
     new NiviteNav();
     new NiviteRsvpModal();
     new NiviteAtcModal();
@@ -23,7 +22,8 @@ window.onload = () => {
 
   /** For outside invite to listen to for the data and render the invite **/
   document.addEventListener(CE_LOADED, (event) => {
-    const invite = (((event as CustomEvent).detail) as IInviteDB);
-    console.log('Go render this invite to your heart\'s content');
+    document.body.classList.add('adjustmargin');
+    // const invite = (((event as CustomEvent).detail) as IInviteDB);
+    // console.log('Go render this invite to your heart\'s content');
   });
 }

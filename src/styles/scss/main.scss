@@ -1,7 +1,7 @@
 @import 'anim.scss';
 
 /* set body margin */
-body {
+body.adjustmargin {
   @include animation('applymargin 1s 1');
   /* nav is 71px */
   margin-top: 75px !important;

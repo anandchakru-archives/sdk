@@ -1,13 +1,14 @@
 import { CE_ALERT } from "../const/constants";
 import { IAlert, NiviteNamedNodeMap } from "../pojo/invite";
+import { ServiceFactory } from "../service/factory";
+import { ApiService } from "../service/api.service";
 
 export class NiviteAlert {
   private alert: IAlert = { msg: '', type: 'success' };
-  private url = new URL(window.location.href).searchParams;
-  private disabled = this.url.get('dbia'); // Disable-build-In-Alert
 
-  constructor(private dom: HTMLDivElement = document.createElement('div')) {
-    if (!this.disabled) {
+  constructor(private dom: HTMLDivElement = document.createElement('div'),
+    private api: ApiService = ServiceFactory.instance().get('api')) {
+    if (!this.api.disablAlert) {
       this.dom.id = 'nivite-alert-modal';
       const nivite = document.getElementById('nivite');
       nivite && nivite.append(this.dom);

@@ -1,14 +1,18 @@
 import { IBaseDB, IInviteDB, ICustomerInviteDB } from "../pojo/invite";
 import { ReplaySubject, of, from, Observable } from 'rxjs';
-import { CE_LOADED } from "../const/constants";
+import { CE_LOADED, CE_ALERT } from "../const/constants";
 
 export class ApiService {
+  private url = new URL(window.location.href).searchParams;
+
   public invite: IInviteDB = { title: 'Default Title' };
   public loaded = new ReplaySubject(1);
-  private url = new URL(window.location.href).searchParams;
-  private iOid = this.url.get('iOid');
-  private ciOid = this.url.get('ciOid');
-  private lport = this.url.get('lport');
+  public iOid = this.url.get('iOid');       // [required] Invite oid - identifies invite
+  public ciOid = this.url.get('ciOid');     // [optional] CustomerInvite oid - identifies customerInvite
+  public lport = this.url.get('lport');     // [optional] Use http://localhost:8080 and not api.nivite.com
+  public disablAlert = this.url.get('da');  // [optional] Disable-built-In-Alert
+  public sample = this.url.get('sj');        // [optional] Fall back to sdk's sample.json, if backend is down/unreachable
+  public lsample = this.url.get('lsj');      // [optional] Fall back to local sample.json, if backend is down/unreachable
   constructor(private host: string = '//api.nivite.com') {
     if (!this.supports()) {
       alert('EmbEr: Unable to make Ajax calls to the server.'); // EmbEr = Embarassing Error
@@ -30,27 +34,36 @@ export class ApiService {
       this.loadsample();
     }
   }
-  private broadcastInvite() {
-    this.loaded.next(this.invite);
-    const nivite = document.getElementById('nivite');
-    if (nivite) {
-      const customEvent = document.createEvent('CustomEvent');
-      customEvent.initCustomEvent(CE_LOADED, true, false, this.invite);
-      nivite.dispatchEvent(customEvent);
-    }
-  }
-
-  private loadsample() {
-    this.get('//nivite.github.io/sdk/sample.json').then((rsp: IBaseDB) => {
-      this.invite = rsp as IInviteDB;
-      this.broadcastInvite();
-    });
-  }
   public upsertRsvp(customerInvite: ICustomerInviteDB): Observable<IBaseDB> {
     if (customerInvite.customerId) {
       return from(this.put(this.host + '/api/public/rsvp', customerInvite));
     } else {
       return from(this.post(this.host + '/api/public/rsvp', customerInvite));
+    }
+  }
+  public dispatchCustomEvent(id: string, data: any) {
+    const nivite = document.getElementById('nivite');
+    if (nivite) {
+      const customEvent = document.createEvent('CustomEvent');
+      customEvent.initCustomEvent(id, true, false, data);
+      nivite.dispatchEvent(customEvent);
+    }
+  }
+  private broadcastInvite() {
+    this.loaded.next(this.invite);
+    this.dispatchCustomEvent(CE_LOADED, this.invite);
+  }
+  private loadsample() {
+    if (this.sample || this.lsample) {
+      this.dispatchCustomEvent(CE_ALERT, { type: 'warning', msg: 'Not an actual Invite. Using sample.json for demo.', data: {} });
+      this.get(this.lsample ? 'sample.json' : '//nivite.github.io/sdk/sample.json').then((rsp: IBaseDB) => {
+        this.invite = rsp as IInviteDB;
+        this.broadcastInvite();
+      }, () => {
+        this.dispatchCustomEvent(CE_ALERT, { type: 'danger', msg: 'Unable to load sample.json. Please report the issue.', data: {} });
+      });
+    } else {
+      this.dispatchCustomEvent(CE_ALERT, { type: 'danger', msg: 'Unable to reach backend, please try again after sometime. If you want use a sample data, append `&sj=1` in the url', data: {} });
     }
   }
   private supports() {

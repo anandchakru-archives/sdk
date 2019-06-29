@@ -325,25 +325,12 @@ export class NiviteRsvpModal {
         }
       }
 
-      if (this.nivite) {
-        const customEvent = document.createEvent('CustomEvent');
-        customEvent.initCustomEvent(CE_RSVP_SAVED, true, false, this.api.invite);
-        this.nivite.dispatchEvent(customEvent);
-
-        const customEvent2 = document.createEvent('CustomEvent');
-        customEvent2.initCustomEvent(CE_ALERT, true, false, { msg: `Your response (${this.getRsvp()}) is Saved, don\'t forget, add it to your calendar.`, type: 'success' })
-        this.nivite.dispatchEvent(customEvent2);
-      }
+      this.api.dispatchCustomEvent(CE_RSVP_SAVED, this.api.invite);
+      this.api.dispatchCustomEvent(CE_ALERT, { type: 'success', msg: `Your response (${this.getRsvp()}) is Saved, don\'t forget, add it to your calendar.` });
       $('#niviteRsvpModal').modal('hide');  //this.resetRsvpForm();
     }, (error) => {
-      if (this.nivite) {
-        const customEvent = document.createEvent('CustomEvent');
-        customEvent.initCustomEvent(CE_ALERT, true, false, { msg: 'Error Saving Response, please retry after some time.', type: 'danger', error })
-        this.nivite.dispatchEvent(customEvent);
-        $('#niviteRsvpModal').modal('hide');  //this.resetRsvpForm();
-
-      }
+        this.api.dispatchCustomEvent(CE_ALERT, { type: 'danger', msg: 'Error Saving Response, please retry after some time.', error });
+      $('#niviteRsvpModal').modal('hide');  //this.resetRsvpForm();
     });
-
   }
 }
