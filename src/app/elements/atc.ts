@@ -54,7 +54,7 @@ export class NiviteAtcModal {
         </div>
         <div class="modal-body">
           <div class="btn-group d-flex">
-            <button class="btn text-white bg-apple" niviteclick="apple">
+            <button class="btn text-white bg-apple d-none d-lg-block" niviteclick="apple"> <!-- visible if width >= 992px; not working in iOS 12, will enable once iOS13 fixes this -->
               <span class="d-inline mr-2" niviteclick="apple"><i class="fab fa-apple" niviteclick="apple"></i></span>
               <span class="d-sm-inline d-none" niviteclick="apple">Apple</span>
             </button>
