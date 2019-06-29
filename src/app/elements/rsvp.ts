@@ -15,6 +15,7 @@ export class NiviteRsvpModal {
     const nivite = document.getElementById('nivite');
     nivite && nivite.append(this.dom);
     this.paint();
+    this.listen();
   }
   private paint() {
     this.dom.addEventListener("click", (event: Event) => {
@@ -135,7 +136,17 @@ export class NiviteRsvpModal {
       this.resetRsvpForm();
     })
   }
-
+  listen() {
+    document.addEventListener('niviteShowRsvpModal', (event) => {
+      $('#niviteRsvpModal').modal('show');
+      if (event) {
+        const detail = (event as CustomEvent).detail;
+        if (detail && detail.changeEmail) {
+          this.showFormEmailDiv();
+        }
+      }
+    });
+  }
   getRsvp() {
     if (this.api.invite && this.api.invite.customerInvite) {
       switch (this.api.invite.customerInvite.rsvp) {

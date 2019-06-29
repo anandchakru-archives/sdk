@@ -12,6 +12,7 @@ export class NiviteNav {
     const nivite = document.getElementById('nivite');
     nivite && nivite.append(this.dom);
     this.paint();
+    this.listen();
   }
   private paint() {
     this.dom.addEventListener("click", (event: Event) => {
@@ -47,6 +48,12 @@ export class NiviteNav {
   </nav>
 `;
   }
+  listen() {
+    document.addEventListener('niviteNavigate', (event) => {
+      this.navigateToMaps();
+    });
+  }
+
   getRsvp() {
     if (this.api.invite && this.api.invite.customerInvite) {
       switch (this.api.invite.customerInvite.rsvp) {

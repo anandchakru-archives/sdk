@@ -13,6 +13,7 @@ export class NiviteAtcModal {
     const nivite = document.getElementById('nivite');
     nivite && nivite.append(this.dom);
     this.paint();
+    this.listen();
   }
   private paint() {
     this.dom.addEventListener("click", (event: Event) => {
@@ -77,4 +78,10 @@ export class NiviteAtcModal {
     </div>
   </div>`;
   }
+  listen() {
+    document.addEventListener('niviteShowAddToCalendarModal', (event) => {
+      $('#niviteCalendarModal').modal('show');
+    });
+  }
+
 }
