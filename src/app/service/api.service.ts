@@ -20,7 +20,7 @@ export class ApiService {
       const url = this.host + '/repo/invite/search/byOid?oid=' + this.iOid + (this.ciOid ? ('&ciOid=' + this.ciOid) : ('')) + '&projection=preview';
       this.get(url).then((rsp: IBaseDB) => {
         this.invite = rsp as IInviteDB;
-        this.loaded.next(this.invite);
+        this.broadcastInvite();
       }).catch((e) => {
         console.log('Unable to fetch Invite: ' + JSON.stringify(e));
         this.loadsample();
@@ -29,10 +29,20 @@ export class ApiService {
       this.loadsample();
     }
   }
+  private broadcastInvite() {
+    this.loaded.next(this.invite);
+    const nivite = document.getElementById('nivite');
+    if (nivite) {
+      const customEvent = document.createEvent('CustomEvent');
+      customEvent.initCustomEvent('niviteLoaded', true, false, this.invite);
+      nivite.dispatchEvent(customEvent);
+    }
+  }
+
   private loadsample() {
     this.get('//nivite.github.io/sdk/sample.json').then((rsp: IBaseDB) => {
       this.invite = rsp as IInviteDB;
-      this.loaded.next(this.invite);
+      this.broadcastInvite();
     });
   }
   public upsertRsvp(customerInvite: ICustomerInviteDB): Observable<IBaseDB> {
