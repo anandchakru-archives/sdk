@@ -2,6 +2,7 @@ import { ServiceFactory } from "../service/factory";
 import { ApiService } from "../service/api.service";
 import { NiviteNamedNodeMap } from "../pojo/invite";
 import { CalendarService } from "../service/calendar.service";
+import { CE_SHOW_ATC } from "../const/constants";
 
 export class NiviteAtcModal {
   // attributes
@@ -79,7 +80,7 @@ export class NiviteAtcModal {
   </div>`;
   }
   listen() {
-    document.addEventListener('niviteShowAddToCalendarModal', (event) => {
+    document.addEventListener(CE_SHOW_ATC, (event) => {
       $('#niviteCalendarModal').modal('show');
     });
   }

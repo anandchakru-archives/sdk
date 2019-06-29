@@ -1,5 +1,6 @@
 import { IBaseDB, IInviteDB, ICustomerInviteDB } from "../pojo/invite";
 import { ReplaySubject, of, from, Observable } from 'rxjs';
+import { CE_LOADED } from "../const/constants";
 
 export class ApiService {
   public invite: IInviteDB = { title: 'Default Title' };
@@ -34,7 +35,7 @@ export class ApiService {
     const nivite = document.getElementById('nivite');
     if (nivite) {
       const customEvent = document.createEvent('CustomEvent');
-      customEvent.initCustomEvent('niviteLoaded', true, false, this.invite);
+      customEvent.initCustomEvent(CE_LOADED, true, false, this.invite);
       nivite.dispatchEvent(customEvent);
     }
   }

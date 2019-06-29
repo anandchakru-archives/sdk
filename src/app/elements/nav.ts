@@ -2,6 +2,7 @@
 import { ServiceFactory } from "../service/factory";
 import { ApiService } from "../service/api.service";
 import { NiviteNamedNodeMap } from "../pojo/invite";
+import { CE_NAVIGATE } from "../const/constants";
 
 export class NiviteNav {
   // attributes
@@ -49,7 +50,7 @@ export class NiviteNav {
 `;
   }
   listen() {
-    document.addEventListener('niviteNavigate', (event) => {
+    document.addEventListener(CE_NAVIGATE, (event) => {
       this.navigateToMaps();
     });
   }

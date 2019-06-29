@@ -1,6 +1,7 @@
 import { ServiceFactory } from "../service/factory";
 import { ApiService } from "../service/api.service";
 import { NiviteNamedNodeMap, ICustomerInviteDB } from "../pojo/invite";
+import { CE_SHOW_RSVP, CE_RSVP_SAVED, CE_ALERT } from "../const/constants";
 
 export class NiviteRsvpModal {
   private dom: HTMLDivElement;
@@ -9,11 +10,11 @@ export class NiviteRsvpModal {
   private formHeadCountDiv: HTMLDivElement | undefined;
   private formLongMsgDiv: HTMLDivElement | undefined;
   private formRsvpButtonsDiv: HTMLDivElement | undefined;
+  private nivite = document.getElementById('nivite');
   constructor(private api: ApiService = ServiceFactory.instance().get('api')) {
     this.dom = document.createElement('div');
     this.dom.id = 'nivite-rsvp-modal';
-    const nivite = document.getElementById('nivite');
-    nivite && nivite.append(this.dom);
+    this.nivite && this.nivite.append(this.dom);
     this.paint();
     this.listen();
   }
@@ -137,7 +138,7 @@ export class NiviteRsvpModal {
     })
   }
   listen() {
-    document.addEventListener('niviteShowRsvpModal', (event) => {
+    document.addEventListener(CE_SHOW_RSVP, (event) => {
       $('#niviteRsvpModal').modal('show');
       if (event) {
         const detail = (event as CustomEvent).detail;
@@ -313,12 +314,7 @@ export class NiviteRsvpModal {
     customerInvite.longMsg = longMsgIp ? longMsgIp.value : '';
     customerInvite.rsvp = rsvp;
     this.api.upsertRsvp(customerInvite).subscribe((customerInviteSaved: ICustomerInviteDB) => {
-      if (customerInvite.referredByOid) {
-        const ciOidIndx = window.location.href.indexOf('&ciOid=');
-        const newurl = window.location.href.substr(0, ciOidIndx > 0 ? ciOidIndx : window.location.href.length) + '&ciOid=' + customerInviteSaved.oid;
-        console.log('Navigate to:' + newurl);
-        // window.location.href = newurl;
-      }
+
       this.api.invite.customerInvite = customerInviteSaved;
       if (!this.api.invite.customerInvite.customer) {
         this.api.invite.customerInvite.customer = {
@@ -328,9 +324,25 @@ export class NiviteRsvpModal {
           oid: customerInviteSaved.customerOid
         }
       }
-      this.resetRsvpForm();
+
+      if (this.nivite) {
+        const customEvent = document.createEvent('CustomEvent');
+        customEvent.initCustomEvent(CE_RSVP_SAVED, true, false, this.api.invite);
+        this.nivite.dispatchEvent(customEvent);
+
+        const customEvent2 = document.createEvent('CustomEvent');
+        customEvent2.initCustomEvent(CE_ALERT, true, false, { msg: `Your response (${this.getRsvp()}) is Saved, you may add it to your calendar.`, type: 'success' })
+        this.nivite.dispatchEvent(customEvent2);
+      }
+      $('#niviteRsvpModal').modal('hide');  //this.resetRsvpForm();
     }, (error) => {
-      // todo;
+      if (this.nivite) {
+        const customEvent = document.createEvent('CustomEvent');
+        customEvent.initCustomEvent(CE_ALERT, true, false, { msg: 'Error Saving Response, please retry after some time.', type: 'danger', error })
+        this.nivite.dispatchEvent(customEvent);
+        $('#niviteRsvpModal').modal('hide');  //this.resetRsvpForm();
+
+      }
     });
 
   }

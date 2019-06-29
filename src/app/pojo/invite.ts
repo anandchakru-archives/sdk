@@ -113,3 +113,8 @@ export interface ICustomerDB extends IBaseDB {
   tz?: string;
   roles?: ICustomerRoleDB[];
 }
+export interface IAlert {
+  msg: string;
+  type: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark';
+  error?: any;
+}
