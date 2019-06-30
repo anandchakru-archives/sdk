@@ -5,8 +5,6 @@ import { CalendarService } from './app/service/calendar.service';
 import { NiviteNav } from './app/elements/nav';
 import { NiviteRsvpModal } from './app/elements/rsvp';
 import { NiviteAtcModal } from './app/elements/atc';
-import { IInviteDB } from './app/pojo/invite';
-import { CE_LOADED } from './app/const/constants';
 import { NiviteAlert } from './app/elements/alert';
 import { NiviteInvite } from './app/elements/invite';
 
