@@ -1,6 +1,7 @@
 import { ServiceFactory } from "../service/factory";
 import { ApiService } from "../service/api.service";
 import * as Mustache from 'mustache';
+import { CE_REFRESH } from "../const/constants";
 
 export class NiviteInvite {
   private invite = document.getElementById('invite');
@@ -30,8 +31,27 @@ export class NiviteInvite {
             <div id="timeTo">${this.api.invite.timeTo}</div>
           </div>
         `;
+        const photos = document.createElement('div');
+        photos.id = "photos";
+        if (this.api.invite.photos) {
+          for (let photoIndx in this.api.invite.photos) {
+            const photo = this.api.invite.photos[photoIndx];
+            const photoDOM = document.createElement('img');
+            photoDOM.id = 'photo' + photoIndx;
+            photoDOM.src = photo.url;
+            photoDOM.title = photo.title as string;
+            photoDOM.alt = photo.description as string;
+            photoDOM.setAttribute('data-tags', photo.tags as string);
+            photos.append(photoDOM)
+          }
+        }
+        this.invite.append(photos)
       }
     }
   }
-  listen() { }
+  listen() {
+    document.addEventListener(CE_REFRESH, (event) => {
+      this.paint();
+    });
+  }
 }
