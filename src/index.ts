@@ -8,10 +8,9 @@ import { NiviteAtcModal } from './app/elements/atc';
 import { NiviteAlert } from './app/elements/alert';
 import { NiviteInvite } from './app/elements/invite';
 
-window.onload = () => {
-
-  const api = (ServiceFactory.instance().create('api', new ApiService()) as ApiService);
+window.addEventListener('load', () => {
   ServiceFactory.instance().create('calendar', new CalendarService());
+  const api = (ServiceFactory.instance().create('api', new ApiService()) as ApiService);
   new NiviteAlert();
   api.loaded.subscribe((invite) => {
     new NiviteInvite();
@@ -19,4 +18,4 @@ window.onload = () => {
     new NiviteRsvpModal();
     new NiviteAtcModal();
   });
-}
+}, false);

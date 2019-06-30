@@ -7,12 +7,12 @@ export class ApiService {
 
   public invite: IInviteDB = { title: 'Default Title' };
   public loaded = new ReplaySubject(1);
-  public iOid = this.url.get('iOid');       // [required] Invite oid - identifies invite
-  public ciOid = this.url.get('ciOid');     // [optional] CustomerInvite oid - identifies customerInvite
-  public lport = this.url.get('lport');     // [optional] Use http://localhost:8080 and not api.nivite.com
-  public disablAlert = this.url.get('da');  // [optional] Disable-built-In-Alert
-  public sample = this.url.get('sj');        // [optional] Fall back to sdk's sample.json, if backend is down/unreachable
-  public lsample = this.url.get('lsj');      // [optional] Fall back to local sample.json, if backend is down/unreachable
+  public iOid = this.url.get('iOid');         // [required] Invite oid - identifies invite
+  public ciOid = this.url.get('ciOid');       // [optional] CustomerInvite oid - identifies customerInvite
+  public lport = this.url.get('lp');          // [optional] Local & Port http://localhost:8080 and not https://api.nivite.com
+  public disablAlert = this.url.get('da');    // [optional] Disable-built-In-Alert
+  public sample = this.url.get('sj');         // [optional] Fall back to sdk's sample.json, if backend is down/unreachable
+  public lsample = this.url.get('lsj');       // [optional] Fall back to local sample.json, if backend is down/unreachable
   constructor(private host: string = '//api.nivite.com') {
     if (!this.supports()) {
       alert('EmbEr: Unable to make Ajax calls to the server.'); // EmbEr = Embarassing Error
