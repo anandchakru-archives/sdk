@@ -23,7 +23,9 @@ window.onload = () => {
   /** For outside invite to listen to for the data and render the invite **/
   document.addEventListener(CE_LOADED, (event) => {
     document.body.classList.add('adjustmargin');
-    // const invite = (((event as CustomEvent).detail) as IInviteDB);
-    // console.log('Go render this invite to your heart\'s content');
+    const invite = (((event as CustomEvent).detail) as IInviteDB);
+    if (invite && invite.title) {
+      document.title = 'nIvite - ' + invite.title;
+    }
   });
 }
