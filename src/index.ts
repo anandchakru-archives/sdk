@@ -8,6 +8,7 @@ import { NiviteAtcModal } from './app/elements/atc';
 import { IInviteDB } from './app/pojo/invite';
 import { CE_LOADED } from './app/const/constants';
 import { NiviteAlert } from './app/elements/alert';
+import { NiviteInvite } from './app/elements/invite';
 
 window.onload = () => {
 
@@ -15,17 +16,9 @@ window.onload = () => {
   ServiceFactory.instance().create('calendar', new CalendarService());
   new NiviteAlert();
   api.loaded.subscribe((invite) => {
+    new NiviteInvite();
     new NiviteNav();
     new NiviteRsvpModal();
     new NiviteAtcModal();
-  });
-
-  /** For outside invite to listen to for the data and render the invite **/
-  document.addEventListener(CE_LOADED, (event) => {
-    document.body.classList.add('adjustmargin');
-    const invite = (((event as CustomEvent).detail) as IInviteDB);
-    if (invite && invite.title) {
-      document.title = 'nIvite - ' + invite.title;
-    }
   });
 }
