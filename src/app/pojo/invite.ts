@@ -1,4 +1,14 @@
 import moment from 'moment';
+/* import Mustache from "mustache";
+
+type MustacheWaxType = typeof Mustache;
+
+export interface MustacheWaxStatic extends MustacheWaxType {
+  Formatter: any;
+}
+
+declare var MustacheWax: MustacheWaxStatic;
+export default MustacheWax; */
 
 export class NiviteNamedNodeMap extends NamedNodeMap {
   constructor(public niviteclick: Attr) {

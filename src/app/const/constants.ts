@@ -12,4 +12,4 @@ export const CE_SHOW_RSVP = 'niviteShowRsvpModal';
 export const CE_SHOW_ATC = 'niviteShowAddToCalendarModal';
 export const CE_NAVIGATE = 'niviteNavigate';
 export const CE_ALERT = 'niviteShowAlert';
-
+export const CE_REFRESH = 'niviteRefreshHtml';

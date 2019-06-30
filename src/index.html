@@ -24,6 +24,25 @@
   <div id="nivite"></div>
   <h1>Your main Invitation goes here. But this is not a sample.</h1>
   <p>Go to <a href="//github.com/nivite/example1">example1</a> for a full working demo of the sdk.</p>
+
+  <!-- optional, if present invite details will be populated into this automatically -->
+  <div id="invite">
+  </div>
+  <!-- optional, if you are using mustache templating - requires mustache.min.js -->
+  <script id="template" type="x-tmpl-mustache">
+      <div id="title">{{title}}</div>
+      <div id="shortMsg">{{shortMsg}}</div>
+      <div id="longMsg">{{longMsg}}</div>
+      <div id="addr">
+        <div id="addrName">{{addrName}}</div>
+        <div id="addrText">{{addrText}}</div>
+      </div>
+      <div id="time">
+        <div id="timeFrom">{{timeFrom | date}}</div>
+        <div id="timeTo">{{timeTo | date}}</div>
+      </div>
+    </script>
+
 </body>
 
 </html>
