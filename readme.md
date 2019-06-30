@@ -9,7 +9,7 @@ Sample at https://github.com/nivite/example1.git
     1. [VS Code](https://code.visualstudio.com/) to edit your code.
     2. An account in [github](https://github.com/join) to host. Example username **GHUSERNAME**.
     3. [Git](https://www.linode.com/docs/development/version-control/how-to-install-git-on-linux-mac-and-windows/) to upload your code to a repo.
-    4. An invite created at [nIvite](nivite.com) - you will get invite.oid. Example: `1807175406407`
+    4. An invite created at [nIvite](https://nivite.com) - you will get invite.oid. Example: `1807175406407`
     5. [Curiosity!](https://www.merriam-webster.com/dictionary/curiosity) :)
 2. Or if you want to create your invite from scratch:
 ```sh
