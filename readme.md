@@ -3,14 +3,8 @@ Use this SDK to create your own invite and interact with [Nivite](nivite.com)
 
 Sample at https://github.com/nivite/example1.git
 
-# How to
-
-# Ng8
-Demonstrates the use of [@nivite/sdk](https://github.com/nivite/sdk)
-
-For a quick demo, go to [gh-pages](http://anandchakru.github.io/nivite/example1)
-
 ## How to
+
 1. Things you'll require:
     1. [VS Code](https://code.visualstudio.com/) to edit your code.
     2. An account in [github](https://github.com/join) to host. Example username **GHUSERNAME**.
