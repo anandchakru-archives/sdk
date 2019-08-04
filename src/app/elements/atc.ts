@@ -1,13 +1,13 @@
 import { ServiceFactory } from "../service/factory";
-import { ApiService } from "../service/api.service";
 import { NiviteNamedNodeMap } from "../pojo/invite";
 import { CalendarService } from "../service/calendar.service";
 import { CE_SHOW_ATC } from "../const/constants";
+import { ISdkApi } from "../api/api";
 
 export class NiviteAtcModal {
   // attributes
   private dom: HTMLDivElement;
-  constructor(private api: ApiService = ServiceFactory.instance().get('api'),
+  constructor(private api: ISdkApi = ServiceFactory.instance().get('api'),
     private atc: CalendarService = ServiceFactory.instance().get('calendar')) {
     this.dom = document.createElement('div');
     this.dom.id = 'nivite-atc-modal';

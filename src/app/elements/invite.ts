@@ -1,13 +1,13 @@
 import { ServiceFactory } from "../service/factory";
-import { ApiService } from "../service/api.service";
 import * as Mustache from 'mustache';
 import { CE_REFRESH } from "../const/constants";
+import { ISdkApi } from "../api/api";
 
 export class NiviteInvite {
   private invite = document.getElementById('invite');
   private template = document.getElementById('inviteTemplate');
 
-  constructor(private api: ApiService = ServiceFactory.instance().get('api')) {
+  constructor(private api: ISdkApi = ServiceFactory.instance().get('api')) {
     this.paint();
     this.listen();
   }

@@ -1,13 +1,13 @@
 import { CE_ALERT } from "../const/constants";
 import { IAlert, NiviteNamedNodeMap } from "../pojo/invite";
 import { ServiceFactory } from "../service/factory";
-import { ApiService } from "../service/api.service";
+import { ISdkApi } from "../api/api";
 
 export class NiviteAlert {
   private alert: IAlert = { msg: '', type: 'success' };
 
   constructor(private dom: HTMLDivElement = document.createElement('div'),
-    private api: ApiService = ServiceFactory.instance().get('api')) {
+    private api: ISdkApi = ServiceFactory.instance().get('api')) {
     if (!this.api.disablAlert) {
       this.dom.id = 'nivite-alert-modal';
       const nivite = document.getElementById('nivite');

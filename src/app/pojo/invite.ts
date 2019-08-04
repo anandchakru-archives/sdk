@@ -95,6 +95,7 @@ export interface ICustomerInviteDB extends IBaseDB {
   customerName?: string;
   customerId?: number;
   customerOid?: string;
+  customerUid?: string;
   inviteId?: number;
   inviteOid?: string;
   referredByOid?: string; // If the Guests changes to new email and responds, capture the previously selected oid if any

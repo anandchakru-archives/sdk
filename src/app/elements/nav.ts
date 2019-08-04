@@ -1,13 +1,13 @@
 
 import { ServiceFactory } from "../service/factory";
-import { ApiService } from "../service/api.service";
 import { NiviteNamedNodeMap } from "../pojo/invite";
-import { CE_NAVIGATE } from "../const/constants";
+import { CE_NAVIGATE, CE_RSVP_SAVED } from "../const/constants";
+import { ISdkApi } from "../api/api";
 
 export class NiviteNav {
   // attributes
   private dom: HTMLDivElement;
-  constructor(private api: ApiService = ServiceFactory.instance().get('api')) {
+  constructor(private api: ISdkApi = ServiceFactory.instance().get('api')) {
     this.dom = document.createElement('div');
     this.dom.id = 'nivite-nav';
     const nivite = document.getElementById('nivite');
@@ -50,8 +50,13 @@ export class NiviteNav {
 `;
   }
   listen() {
+    // When Navigate clicked, open maps.
     document.addEventListener(CE_NAVIGATE, (event) => {
       this.navigateToMaps();
+    });
+    // Refresh on RSVP save
+    document.addEventListener(CE_RSVP_SAVED, (event) => {
+      this.paint();
     });
   }
 

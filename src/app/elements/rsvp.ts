@@ -1,7 +1,7 @@
 import { ServiceFactory } from "../service/factory";
-import { ApiService } from "../service/api.service";
 import { NiviteNamedNodeMap, ICustomerInviteDB } from "../pojo/invite";
 import { CE_SHOW_RSVP, CE_RSVP_SAVED, CE_ALERT } from "../const/constants";
+import { ISdkApi } from "../api/api";
 
 export class NiviteRsvpModal {
   private dom: HTMLDivElement;
@@ -11,7 +11,7 @@ export class NiviteRsvpModal {
   private formLongMsgDiv: HTMLDivElement | undefined;
   private formRsvpButtonsDiv: HTMLDivElement | undefined;
   private nivite = document.getElementById('nivite');
-  constructor(private api: ApiService = ServiceFactory.instance().get('api')) {
+  constructor(private api: ISdkApi = ServiceFactory.instance().get('api')) {
     this.dom = document.createElement('div');
     this.dom.id = 'nivite-rsvp-modal';
     this.nivite && this.nivite.append(this.dom);
